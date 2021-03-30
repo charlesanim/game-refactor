@@ -1,16 +1,14 @@
-<div style="margin-top: 50px">
-  <h3 style="text-align: center">My Game Collection</h3>
-  <app-game-view
-    *ngIf="collection$ | async; else noGames"
-    [removeGameSuccess]="removeGameSuccess$ | async"
-    [fetchCollectionError]="fetchCollectionError$ | async"
-    [collection]="collection$ | async"
-    [removeGameError]="removeGameError$ | async"
-    (viewGame)="onViewGame($event)"
-    (removeGame)="onRemoveGame($event)"
-  >
-  </app-game-view>
-  <ng-template #noGames>
-    <p>No games to display, please search for games above.</p>
-  </ng-template>
-</div>
+<app-game-view
+  *ngIf="collection$ | async; else noGames"
+  [removeGameSuccess]="removeGameSuccess$ | async"
+  [fetchCollectionError]="fetchCollectionError$ | async"
+  [collection]="collection$ | async"
+  [loading]="loading$ | async"
+  [removeGameError]="removeGameError$ | async"
+  (viewGame)="onViewGame($event)"
+  (removeGame)="onRemoveGame($event)"
+>
+</app-game-view>
+<ng-template #noGames>
+  <p>No games to display, please search for games above.</p>
+</ng-template>

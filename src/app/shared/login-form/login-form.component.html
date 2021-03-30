@@ -27,7 +27,12 @@
     </mat-card-content>
 
     <div class="spinner-wrapper">
-      <button mat-raised-button color="primary" (click)="onSubmit()">
+      <button
+        [disabled]="loginLoading"
+        mat-raised-button
+        color="primary"
+        (click)="onSubmit()"
+      >
         Login
       </button>
     </div>

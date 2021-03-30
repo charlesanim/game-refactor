@@ -16,6 +16,11 @@ export const getLoading = createSelector(
   (state: AuthState) => state.loading
 );
 
+export const getLoginLoading = createSelector(
+  getAuthState,
+  (state: AuthState) => state.loginLoading
+);
+
 export const getSearchGameSuccess = createSelector(
   getAuthState,
   (state: AuthState) => state.searchResponse
@@ -74,6 +79,7 @@ export const getRemoveGameError = createSelector(
 
 export const authQuery = {
   getLoading,
+  getLoginLoading,
   getLoginSuccess,
   addToCollectionSuccess,
   getSearchGameSuccess,

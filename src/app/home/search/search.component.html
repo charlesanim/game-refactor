@@ -49,8 +49,11 @@
           Search
         </button>
       </form>
-      <mat-error style="margin-top: 20px" *ngIf="error">
-        <span>Search Failed or game not found, please try again later</span>
+      <mat-error
+        style="margin-top: 20px"
+        *ngIf="error || (submitted && !loading && searchGame?.length === 0)"
+      >
+        <span>Search failed or game not found, please try again later</span>
       </mat-error>
     </mat-card-content>
   </mat-card>

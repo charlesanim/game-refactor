@@ -7,10 +7,11 @@
   (searchGames)="onSearchGames($event)"
 ></app-search>
 <app-game-view
-  [gameResponse]="searchGame$ | async"
+  [searchGame]="searchGame$ | async"
   [error]="addToCollectionError$ | async"
   [addToCollectionSuccess]="addToCollectionSuccess$ | async"
   [collection]="collection$ | async"
+  [loading]="loading$ | async"
   (addGame)="onAddGame($event)"
   (viewGame)="onViewGame($event)"
 >

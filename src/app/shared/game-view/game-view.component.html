@@ -1,68 +1,101 @@
-<div *ngIf="router.url.includes('/home') && gameResponse?.length" class="main">
-  <ul class="cards">
-    <li *ngFor="let game of gameResponse; index as i">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title
-            style="cursor: pointer"
-            (click)="viewGameDetails(game.gameId)"
-            >Game Title: {{ game.title }}</mat-card-title
-          >
-          <mat-card-subtitle>Platform: {{ game.platform }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-card-actions [id]="'unique' + game.gameId">
-            <button
-              aria-label="Add to Collection"
-              (click)="onSubmit(game.gameId)"
-              style="color: green"
-              mat-button
-              [id]="'unique' + game.gameId"
-            >
-              <mat-icon>add_circle_outline</mat-icon>Add to Collection
-            </button>
-          </mat-card-actions>
-        </mat-card-content>
-      </mat-card>
-    </li>
-  </ul>
-</div>
+<ng-container
+  *ngIf="
+    (loading && searchGame?.length === 0) ||
+      (loading && collection?.length === 0);
+    else view
+  "
+>
+  <mat-spinner style="margin: 0 auto"></mat-spinner>
+</ng-container>
+<ng-template #view>
+  <div *ngIf="router.url.includes('/home')">
+    <div *ngIf="searchGame?.length">
+      <div style="text-align: center">
+        <h2>Game Search Results</h2>
+      </div>
+      <div class="main">
+        <ul class="cards">
+          <li *ngFor="let game of searchGame; index as i">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title
+                  style="cursor: pointer"
+                  (click)="viewGameDetails(game.gameId)"
+                  >Game Title: {{ game.title }}</mat-card-title
+                >
+                <mat-card-subtitle
+                  >Platform: {{ game.platform }}</mat-card-subtitle
+                >
+              </mat-card-header>
+              <mat-card-content>
+                <mat-card-actions [id]="'unique' + game.gameId">
+                  <button
+                    aria-label="Add to Collection"
+                    (click)="onSubmit(game.gameId)"
+                    style="color: green"
+                    mat-button
+                    [id]="'unique' + game.gameId"
+                  >
+                    <mat-icon>add_circle_outline</mat-icon>Add to Collection
+                  </button>
+                </mat-card-actions>
+              </mat-card-content>
+            </mat-card>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-<div class="main" *ngIf="router.url.includes('/collection')">
-  <ul class="cards">
-    <li *ngFor="let game of collection; index as i">
-      <mat-card>
-        <div style="float: left">
-          <ng-container *ngIf="game.imageUrl; else placeholder">
-            <img [alt]="game.title" style="width: 60px" [src]="game.imageUrl" />
-          </ng-container>
-          <ng-template #placeholder>
-            <img alt="placeholder" src="https://via.placeholder.com/60" />
-          </ng-template>
-        </div>
+  <div style="margin-top: 50px" *ngIf="router.url.includes('/collection')">
+    <div *ngIf="collection?.length">
+      <div style="text-align: center">
+        <h2>My Game Collection</h2>
+      </div>
+      <div class="main">
+        <ul class="cards">
+          <li *ngFor="let game of collection; index as i">
+            <mat-card>
+              <div style="float: left">
+                <ng-container *ngIf="game.imageUrl; else placeholder">
+                  <img
+                    [alt]="game.title"
+                    style="width: 60px"
+                    [src]="game.imageUrl"
+                  />
+                </ng-container>
+                <ng-template #placeholder>
+                  <img alt="placeholder" src="https://via.placeholder.com/60" />
+                </ng-template>
+              </div>
 
-        <mat-card-header>
-          <mat-card-title
-            style="cursor: pointer"
-            (click)="viewGameDetails(game.gameId)"
-            >Game Title: {{ game.title }}</mat-card-title
-          >
-          <mat-card-subtitle>Platform: {{ game.platform }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-card-actions [id]="'unique' + game.gameId">
-            <button
-              aria-label="Remove from Collection"
-              (click)="onRemoveGame(game.gameId)"
-              style="color: red"
-              mat-button
-              [id]="'unique' + game.gameId"
-            >
-              <mat-icon>delete_sweep</mat-icon>Remove from Collection
-            </button>
-          </mat-card-actions>
-        </mat-card-content>
-      </mat-card>
-    </li>
-  </ul>
-</div>
+              <mat-card-header>
+                <mat-card-title
+                  style="cursor: pointer"
+                  (click)="viewGameDetails(game.gameId)"
+                  >Game Title: {{ game.title }}</mat-card-title
+                >
+                <mat-card-subtitle
+                  >Platform: {{ game.platform }}</mat-card-subtitle
+                >
+              </mat-card-header>
+              <mat-card-content>
+                <mat-card-actions [id]="'unique' + game.gameId">
+                  <button
+                    aria-label="Remove from Collection"
+                    (click)="onRemoveGame(game.gameId)"
+                    style="color: red"
+                    mat-button
+                    [id]="'unique' + game.gameId"
+                  >
+                    <mat-icon>delete_sweep</mat-icon>Remove from Collection
+                  </button>
+                </mat-card-actions>
+              </mat-card-content>
+            </mat-card>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</ng-template>

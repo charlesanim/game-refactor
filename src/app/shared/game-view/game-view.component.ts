@@ -11,11 +11,12 @@ import { Collection, SearchResponse } from '../data-models';
   styleUrls: ['./game-view.component.scss'],
 })
 export class GameViewComponent {
-  @Input() gameResponse: SearchResponse[] | null = [];
+  @Input() searchGame: SearchResponse[] | null = [];
   @Input() collection: Collection[] | null = [];
   @Input() error: HttpErrorResponse | null = null;
   @Input() addToCollectionSuccess: boolean | null = false;
   @Input() removeGameSuccess: boolean | null = false;
+  @Input() loading: boolean | null = false;
   @Input() fetchCollectionError: HttpErrorResponse | null = null;
   @Input() removeGameError: HttpErrorResponse | null = null;
   @Output() addGame = new EventEmitter<number>();

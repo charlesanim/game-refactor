@@ -4,9 +4,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -30,12 +28,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./search.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchComponent implements OnChanges {
+export class SearchComponent {
   searchForm: FormGroup;
   @Input() loading: boolean | null = false;
-  @Input() searchGame: SearchResponse[] | null = [];
-  @Input() platforms: Platforms[] | null = [];
-  @Input() collection: Collection[] | null = [];
+  @Input()
+  searchGame!: SearchResponse[] | null;
+  @Input()
+  platforms!: Platforms[];
+  @Input()
+  collection!: Collection[];
   @Input() error: HttpErrorResponse | null = null;
   @Output() searchGames = new EventEmitter<SearchRequest>();
   submitted = false;
@@ -57,22 +58,6 @@ export class SearchComponent implements OnChanges {
       startWith(''),
       map((value) => this._filter(value))
     );
-  }
-
-  // Determins if game search doesnt return a result and throws a notification
-  ngOnChanges(changes: SimpleChanges): void {
-    if (
-      this.submitted &&
-      changes.searchGame?.currentValue === changes.searchGame?.currentValue
-    ) {
-      this.snackBar.open(
-        ' No games found that matches your query, please try again.',
-        'OK',
-        {
-          duration: 7000,
-        }
-      );
-    }
   }
   // private function gets called when user begins searching for platform and
   // filters array based off of the searched value matches any data in the array

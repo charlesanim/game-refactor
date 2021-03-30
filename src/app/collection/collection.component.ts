@@ -15,6 +15,7 @@ import { GameViewDialogComponent } from '../shared/game-view-dialog/game-view-di
 export class CollectionComponent implements OnInit {
   collection$ = this.authFacade.collection$;
   submitted = false;
+  loading$ = this.authFacade.loading$;
   fetchCollectionError$ = this.authFacade.fetchCollectionError$;
   removeGameError$ = this.authFacade.removeGameError$;
   removeGameSuccess$ = this.authFacade.removeGameSuccess$;
@@ -32,25 +33,20 @@ export class CollectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authFacade.fetchCollection();
     combineLatest([
       this.fetchCollectionError$,
       this.removeGameSuccess$,
       this.removeGameError$,
-      this.collection$,
     ])
       .pipe(takeUntil(this.onDestroy$))
       // tslint:disable-next-line: deprecation
-      .subscribe(
-        ([collectionError, removeSuccess, removeError, collectionData]) => {
-          if (!collectionData) {
-            this.authFacade.fetchCollection();
-          }
-          this.fetchCollectionScenarioError = collectionError;
-          this.removeGameScenarioSuccess = removeSuccess;
-          this.removeGameScenarioError = removeError;
-          this.snackBarPopup();
-        }
-      );
+      .subscribe(([collectionError, removeSuccess, removeError]) => {
+        this.fetchCollectionScenarioError = collectionError;
+        this.removeGameScenarioSuccess = removeSuccess;
+        this.removeGameScenarioError = removeError;
+        this.snackBarPopup();
+      });
   }
 
   private snackBarPopup(): void {

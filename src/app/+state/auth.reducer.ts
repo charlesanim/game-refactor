@@ -39,6 +39,7 @@ export const AUTH_FEATURE_KEY = 'auth';
 export interface AuthState {
   loginResponse: LoginResponse | null;
   loading: boolean;
+  loginLoading: boolean;
   searchRequest: SearchRequest | null;
   searchResponse: SearchResponse[];
   platforms: Platforms[];
@@ -62,6 +63,7 @@ export interface AuthPartialState {
 
 export const initialState: AuthState = {
   loginResponse: null,
+  loginLoading: false,
   loading: false,
   searchRequest: null,
   searchResponse: [],
@@ -70,7 +72,7 @@ export const initialState: AuthState = {
   gameDetails: [],
   addToCollectionSuccess: false,
   removeGameSuccess: false,
-  //Errors
+  // Errors
   searchGameError: null,
   fetchPlatformsError: null,
   fetchCollectionError: null,
@@ -85,26 +87,25 @@ const authReducer = createReducer(
   on(login, (state, { loginRequest }) => ({
     ...state,
     loginRequest,
-    loading: true,
+    loginLoading: true,
     loginError: null,
   })),
   on(loginSuccess, (state, { loginResponse }) => ({
     ...state,
     loginResponse,
-    loading: false,
+    loginLoading: false,
     loginError: null,
   })),
   on(loginError, (state, { error }) => ({
     ...state,
     loginError: error,
-    loading: false,
+    loginLoading: false,
   })),
   on(searchGame, (state, { searchRequest }) => ({
     ...state,
     searchRequest: null,
     loading: true,
     searchGameError: null,
-    searchResponse: [],
   })),
   on(searchGameSuccess, (state, { searchResponse }) => ({
     ...state,

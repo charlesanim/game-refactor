@@ -18,6 +18,7 @@ import { CollectionModule } from './collection/collection.module';
 import { HeaderComponent } from './shared/header/header.component';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './shared/auth';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HeaderComponent],
@@ -25,11 +26,18 @@ import { AuthInterceptor } from './shared/auth';
     AppRoutingModule,
     BrowserModule,
     SharedModule,
-    HomeModule,
-    CollectionModule,
     AuthModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    HomeModule,
+    CollectionModule,
     StoreModule.forFeature(AUTH_FEATURE_KEY, reducer),
+    EffectsModule.forFeature([AuthEffects]),
+    EffectsModule.forRoot([]),
     StoreModule.forRoot(
       {},
       {
@@ -40,13 +48,8 @@ import { AuthInterceptor } from './shared/auth';
         },
       }
     ),
-    EffectsModule.forFeature([AuthEffects]),
-    EffectsModule.forRoot([]),
-    HttpClientModule,
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: environment.production,
-    }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [
     {

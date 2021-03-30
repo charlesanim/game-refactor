@@ -9,6 +9,7 @@ import { LoginRequest } from 'src/app/shared/data-models';
 })
 export class LoginComponent {
   loginError$ = this.authFacade.loginError$;
+  loginLoading$ = this.authFacade.loginLoading$;
   constructor(private authFacade: AuthFacade) {}
 
   login(authenticate: LoginRequest): void {

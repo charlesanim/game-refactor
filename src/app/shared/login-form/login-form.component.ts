@@ -11,6 +11,7 @@ import { LoginRequest } from '../data-models';
 export class LoginFormComponent {
   loginForm: FormGroup;
   @Input() loginError: HttpErrorResponse | null = null;
+  @Input() loginLoading = false;
   submitted = false;
   @Output() submitLogin = new EventEmitter<LoginRequest>();
 

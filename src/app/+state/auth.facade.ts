@@ -24,6 +24,7 @@ export class AuthFacade {
    * and expose them as observables through the facade.
    */
   loading$ = this.store$.pipe(select(authQuery.getLoading));
+  loginLoading$ = this.store$.pipe(select(authQuery.getLoginLoading));
   searchGame$ = this.store$.pipe(select(authQuery.getSearchGameSuccess));
   platforms$ = this.store$.pipe(select(authQuery.getPlatforms));
   gameDetails$ = this.store$.pipe(select(authQuery.getGameDetails));
