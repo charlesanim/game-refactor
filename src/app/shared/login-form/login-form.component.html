@@ -1,0 +1,41 @@
+<div class="main-div">
+  <mat-card>
+    <mat-card-title style="text-align: center">Welcome</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <input
+            matInput
+            minlength="3"
+            placeholder="Username"
+            type="text"
+            formControlName="username"
+          />
+          <mat-error> Required Field </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            minlength="3"
+            placeholder="Password"
+            type="text"
+            formControlName="password"
+          />
+          <mat-error> Required Field </mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+
+    <div class="spinner-wrapper">
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        Login
+      </button>
+    </div>
+
+    <ng-container>
+      <mat-error>
+        <span>{{ loginError?.error }}</span>
+      </mat-error>
+    </ng-container>
+  </mat-card>
+</div>

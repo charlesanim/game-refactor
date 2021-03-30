@@ -1,0 +1,17 @@
+<app-search
+  [platforms]="platforms$ | async"
+  [loading]="loading$ | async"
+  [collection]="collection$ | async"
+  [error]="searchGameError$ | async"
+  [searchGame]="searchGame$ | async"
+  (searchGames)="onSearchGames($event)"
+></app-search>
+<app-game-view
+  [gameResponse]="searchGame$ | async"
+  [error]="addToCollectionError$ | async"
+  [addToCollectionSuccess]="addToCollectionSuccess$ | async"
+  [collection]="collection$ | async"
+  (addGame)="onAddGame($event)"
+  (viewGame)="onViewGame($event)"
+>
+</app-game-view>

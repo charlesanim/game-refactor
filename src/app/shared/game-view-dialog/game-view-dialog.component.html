@@ -1,0 +1,78 @@
+<ng-container *ngIf="loading$ | async; else view">
+  <mat-spinner></mat-spinner>
+</ng-container>
+<ng-template #view>
+  <ng-container *ngIf="gameDetails$ | async as gameDetails; else noGameDetails">
+    <h2 mat-dialog-title>Game Details</h2>
+
+    <mat-card style="max-width: 400px">
+      <mat-card-header>
+        <mat-card-title>{{ gameDetails.title }}</mat-card-title>
+        <mat-card-subtitle
+          >Release Date: {{ gameDetails.releaseDate }}</mat-card-subtitle
+        >
+      </mat-card-header>
+      <ng-container *ngIf="gameDetails.imageUrl; else placeholder">
+        <img
+          mat-card-image
+          style="max-width: 350px; margin: 0 auto"
+          [src]="gameDetails.imageUrl"
+          [alt]="gameDetails.title"
+        />
+      </ng-container>
+      <ng-template #placeholder>
+        <img
+          mat-card-image
+          src="https://via.placeholder.com/200"
+          alt="placeholder"
+        />
+      </ng-template>
+
+      <mat-card-content style="margin-top: 20px">
+        <li>
+          <em>Genres</em>:
+          <span *ngFor="let genres of gameDetails.genres">
+            {{ genres }}
+          </span>
+        </li>
+
+        <li>
+          <em>Publishers</em>:
+          <span *ngFor="let pub of gameDetails.publishers">
+            {{ pub }}
+          </span>
+        </li>
+        <li>
+          <em> Platform </em>:
+          <span>{{ gameDetails.platform?.name }} </span>
+        </li>
+        <p>
+          {{ gameDetails.overview }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-dialog-actions align="end">
+      <button
+        color="primary"
+        mat-raised-button
+        [mat-dialog-close]="true"
+        cdkFocusInitial
+      >
+        Close
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-dialog-actions>
+  </ng-container>
+
+  <ng-template #noGameDetails>
+    <ng-container *ngIf="fetchGameDetailsError$ | async as error">
+      <mat-error>
+        <span
+          >{{ error.status }}: Error Fetching Game Details, please try again
+          later</span
+        >
+      </mat-error>
+    </ng-container>
+  </ng-template>
+</ng-template>

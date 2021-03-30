@@ -1,0 +1,30 @@
+<mat-toolbar color="primary" fxLayout="row">
+  <span>Games Platform</span>
+  <div class="right-nav">
+    <ng-container *ngIf="router.url.includes('/login') === false">
+      <button mat-button>
+        Hi,
+        <span style="text-transform: capitalize">
+          {{ username$ | async }}
+        </span>
+      </button>
+      <button
+        mat-button
+        [routerLink]="['/home']"
+        routerLinkActive="router-link-active"
+      >
+        Home
+      </button>
+      <button
+        mat-button
+        [routerLink]="['/collection']"
+        routerLinkActive="router-link-active"
+        [matBadge]="(collection$ | async)?.length || 0"
+        matBadgeColor="accent"
+      >
+        Collections
+      </button>
+      <button (click)="logout()" mat-button>Logout</button>
+    </ng-container>
+  </div>
+</mat-toolbar>
