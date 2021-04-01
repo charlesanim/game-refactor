@@ -6,7 +6,7 @@
   margin-bottom: 50px;
 }
 .mat-card {
-  max-width: 500px;
+  width: 500px;
 }
 .mat-form-field {
   width: 100%;
@@ -15,4 +15,10 @@
 #mat-spinner-load {
   float: right;
   margin: 7px 0px 0px 9px;
+}
+
+@media only screen and (max-width: 768px) {
+  .mat-card {
+    width: 300px;
+  }
 }
