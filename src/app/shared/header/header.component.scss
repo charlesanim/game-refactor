@@ -1,3 +1,33 @@
 .right-nav {
   margin-left: auto;
 }
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .desktop-nav {
+    display: block !important;
+  }
+  .mobile-nav {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mob: */
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-nav {
+    display: block !important;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}

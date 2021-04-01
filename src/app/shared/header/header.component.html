@@ -1,30 +1,85 @@
-<mat-toolbar color="primary" fxLayout="row">
-  <span>Games Platform</span>
-  <div class="right-nav">
+<div class="desktop-nav">
+  <mat-toolbar color="primary" fxLayout="row">
+    <a routerLink="/home">Games Platform</a>
+    <div class="right-nav">
+      <ng-container *ngIf="router.url.includes('/login') === false">
+        <button mat-button>
+          <span>Hi,</span>
+          <span style="text-transform: capitalize">
+            {{ username$ | async }}
+          </span>
+        </button>
+        <button
+          mat-button
+          routerLink="/home"
+          routerLinkActive="router-link-active"
+        >
+          <mat-icon>home</mat-icon>
+          Home
+        </button>
+        <button
+          mat-button
+          routerLink="/collection"
+          routerLinkActive="router-link-active"
+          [matBadge]="(collection$ | async)?.length || 0"
+          matBadgeColor="accent"
+        >
+          <mat-icon>people_outline</mat-icon>
+          Collection
+        </button>
+        <button (click)="logout()" mat-button>Logout</button>
+      </ng-container>
+    </div>
+  </mat-toolbar>
+</div>
+<!-- Mobile Menu-->
+<div class="mobile-nav">
+  <mat-toolbar color="primary" fxLayout="row">
+    <div>
+      <a routerLink="/">Games Platform</a>
+    </div>
+
     <ng-container *ngIf="router.url.includes('/login') === false">
-      <button mat-button>
-        <span>Hi,</span>
-        <span style="text-transform: capitalize">
-          {{ username$ | async }}
-        </span>
-      </button>
-      <button
-        mat-button
-        [routerLink]="['/home']"
-        routerLinkActive="router-link-active"
-      >
-        Home
-      </button>
-      <button
-        mat-button
-        [routerLink]="['/collection']"
-        routerLinkActive="router-link-active"
-        [matBadge]="(collection$ | async)?.length || 0"
-        matBadgeColor="accent"
-      >
-        Collections
-      </button>
-      <button (click)="logout()" mat-button>Logout</button>
+      <span class="fill-remaining-space">
+        <button
+          style="float: right"
+          #r="matMenuTrigger"
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+        >
+          <mat-icon (mouseover)="open(r)">menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" [overlapTrigger]="false">
+          <button mat-button>
+            <span>Hi,</span>
+            <span style="text-transform: capitalize">
+              {{ username$ | async }}
+            </span>
+          </button>
+          <button
+            mat-menu-item
+            routerLink="/home"
+            routerLinkActive="router-link-active"
+          >
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+          </button>
+          <button
+            routerLink="/collection"
+            routerLinkActive="router-link-active"
+            [matBadge]="(collection$ | async)?.length || 0"
+            matBadgeColor="accent"
+            mat-menu-item
+          >
+            <mat-icon>people_outline</mat-icon>
+            <span>Collection</span>
+          </button>
+          <button (click)="logout()" mat-menu-item>
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </span>
     </ng-container>
-  </div>
-</mat-toolbar>
+  </mat-toolbar>
+</div>

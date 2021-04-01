@@ -18,6 +18,11 @@ export class HeaderComponent {
     public router: Router
   ) {}
 
+  // tslint:disable-next-line: typedef
+  open(menu: { openMenu: () => void }) {
+    menu.openMenu();
+  }
+
   logout(): void {
     this.authService.logout();
     this.authFacade.resetState();
