@@ -46,6 +46,10 @@ export const removeGameSuccess = createSelector(
   (state: AuthState) => state.removeGameSuccess
 );
 
+export const gameSearchLoading = createSelector(
+  getAuthState,
+  (state: AuthState) => state.gameSearchLoading
+);
 // Errors
 
 export const getLoginError = createSelector(
@@ -94,4 +98,5 @@ export const authQuery = {
   getFetchGameDetailsError,
   getAddToCollectionError,
   getRemoveGameError,
+  gameSearchLoading,
 };

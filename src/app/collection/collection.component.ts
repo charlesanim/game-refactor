@@ -79,7 +79,7 @@ export class CollectionComponent implements OnInit {
   onViewGame(gameId: number): void {
     this.authFacade.fetchGameDetails(gameId);
     this.dialog.open(GameViewDialogComponent, {
-      width: '500px',
+      width: '700px',
       maxHeight: 700,
     });
   }

@@ -33,6 +33,7 @@ export class AuthFacade {
     select(authQuery.addToCollectionSuccess)
   );
   removeGameSuccess$ = this.store$.pipe(select(authQuery.removeGameSuccess));
+  gameSearchLoading$ = this.store$.pipe(select(authQuery.gameSearchLoading));
 
   //Error
   loginError$ = this.store$.pipe(select(authQuery.getLoginError));

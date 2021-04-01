@@ -1,53 +1,52 @@
 <ng-container *ngIf="gameDetails$ | async as gameDetails; else noGameDetails">
-  <h2 mat-dialog-title>Game Details</h2>
+  <h2 mat-dialog-title>{{ gameDetails.title }}</h2>
+  <div class="main-dialog">
+    <div class="left">
+      <h3>Release Date: {{ gameDetails.releaseDate | date }}</h3>
 
-  <mat-card style="max-width: 400px">
-    <mat-card-header>
-      <mat-card-title>{{ gameDetails.title }}</mat-card-title>
-      <mat-card-subtitle
-        >Release Date: {{ gameDetails.releaseDate }}</mat-card-subtitle
-      >
-    </mat-card-header>
-    <ng-container *ngIf="gameDetails.imageUrl; else placeholder">
-      <img
-        mat-card-image
-        style="max-width: 350px; margin: 0 auto"
-        [src]="gameDetails.imageUrl"
-        [alt]="gameDetails.title"
-      />
-    </ng-container>
-    <ng-template #placeholder>
-      <img
-        mat-card-image
-        src="https://via.placeholder.com/200"
-        alt="placeholder"
-      />
-    </ng-template>
+      <ng-container *ngIf="gameDetails.imageUrl; else placeholder">
+        <img
+          mat-card-image
+          [src]="gameDetails.imageUrl"
+          [alt]="gameDetails.title"
+        />
+      </ng-container>
+      <ng-template #placeholder>
+        <img
+          mat-card-image
+          src="https://via.placeholder.com/300"
+          alt="placeholder"
+        />
+      </ng-template>
+    </div>
 
-    <mat-card-content style="margin-top: 20px">
-      <li>
-        <em>Genres</em>:
-        <span *ngFor="let genres of gameDetails.genres">
-          {{ genres }}
-        </span>
-      </li>
+    <div class="right" style="margin-top: 20px">
+      <div style="margin-top: 30px">
+        <li>
+          <em>Genres</em>:
+          <span *ngFor="let genres of gameDetails.genres">
+            {{ genres }}
+          </span>
+        </li>
 
-      <li>
-        <em>Publishers</em>:
-        <span *ngFor="let pub of gameDetails.publishers">
-          {{ pub }}
-        </span>
-      </li>
-      <li>
-        <em> Platform </em>:
-        <span>{{ gameDetails.platform?.name }} </span>
-      </li>
-      <p>
-        {{ gameDetails.overview }}
-      </p>
-    </mat-card-content>
-  </mat-card>
-
+        <li>
+          <em>Publishers</em>:
+          <span *ngFor="let pub of gameDetails.publishers">
+            {{ pub }}
+          </span>
+        </li>
+        <li>
+          <em> Platform </em>:
+          <span>{{ gameDetails.platform?.name }} </span>
+        </li>
+        <div class="overview">
+          <p>
+            {{ gameDetails.overview }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
   <mat-dialog-actions align="end">
     <button
       color="primary"

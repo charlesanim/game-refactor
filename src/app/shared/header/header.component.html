@@ -24,7 +24,7 @@
           [matBadge]="(collection$ | async)?.length || 0"
           matBadgeColor="accent"
         >
-          <mat-icon>people_outline</mat-icon>
+          <mat-icon>games</mat-icon>
           Collection
         </button>
         <button (click)="logout()" mat-button>Logout</button>
@@ -56,22 +56,12 @@
               {{ username$ | async }}
             </span>
           </button>
-          <button
-            mat-menu-item
-            routerLink="/home"
-            routerLinkActive="router-link-active"
-          >
+          <button mat-menu-item routerLink="/home">
             <mat-icon>home</mat-icon>
             <span>Home</span>
           </button>
-          <button
-            routerLink="/collection"
-            routerLinkActive="router-link-active"
-            [matBadge]="(collection$ | async)?.length || 0"
-            matBadgeColor="accent"
-            mat-menu-item
-          >
-            <mat-icon>people_outline</mat-icon>
+          <button routerLink="/collection" mat-menu-item>
+            <mat-icon>games</mat-icon>
             <span>Collection</span>
           </button>
           <button (click)="logout()" mat-menu-item>

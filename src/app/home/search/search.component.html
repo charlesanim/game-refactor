@@ -42,11 +42,18 @@
         <button
           aria-label="Search"
           color="primary"
+          [disabled]="loading"
           mat-raised-button
           (click)="onSubmit()"
         >
           <mat-icon>search</mat-icon>
           Search
+          <mat-spinner
+            id="mat-spinner-load"
+            strokeWidth="3"
+            [diameter]="20"
+            *ngIf="loading"
+          ></mat-spinner>
         </button>
       </form>
       <mat-error

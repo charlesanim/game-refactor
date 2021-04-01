@@ -1,6 +1,6 @@
 <app-search
   [platforms]="platforms$ | async"
-  [loading]="loading$ | async"
+  [loading]="gameSearchLoading$ | async"
   [collection]="collection$ | async"
   [error]="searchGameError$ | async"
   [searchGame]="searchGame$ | async"
@@ -11,7 +11,7 @@
   [error]="addToCollectionError$ | async"
   [addToCollectionSuccess]="addToCollectionSuccess$ | async"
   [collection]="collection$ | async"
-  [loading]="loading$ | async"
+  [loading]="gameSearchLoading$ | async"
   (addGame)="onAddGame($event)"
   (viewGame)="onViewGame($event)"
 >

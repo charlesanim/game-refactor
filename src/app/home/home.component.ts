@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   addToCollectionError$ = this.authFacade.addToCollectionError$;
   searchGameError$ = this.authFacade.searchGameError$;
   addToCollectionSuccess$ = this.authFacade.addToCollectionSuccess$;
+  gameSearchLoading$ = this.authFacade.gameSearchLoading$;
 
   constructor(private authFacade: AuthFacade, public dialog: MatDialog) {}
 
@@ -43,7 +44,7 @@ export class HomeComponent implements OnInit {
 
   openDialog(): void {
     this.dialog.open(GameViewDialogComponent, {
-      width: '500px',
+      width: '700px',
       maxHeight: 700,
     });
   }
