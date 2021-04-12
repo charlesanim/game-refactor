@@ -3,7 +3,8 @@
     <mat-card-title style="text-align: center">Welcome</mat-card-title>
     <mat-card-content>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
           <input
             matInput
             minlength="5"
@@ -13,7 +14,8 @@
           />
           <mat-error> Required Field </mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
           <input
             matInput
             minlength="6"
@@ -21,6 +23,9 @@
             type="password"
             formControlName="password"
           />
+          <mat-icon style="cursor: pointer" matSuffix
+            >sentiment_very_satisfied</mat-icon
+          >
           <mat-error> Required Field </mat-error>
         </mat-form-field>
       </form>
